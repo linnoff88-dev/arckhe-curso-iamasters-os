@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="pt-PT" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3.3 Positioning | Curso iAmasters OS</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .bg-purple-500\/20 { background-color: rgba(124,58,237,0.12); }
+    html:not(.dark) .bg-purple-500\/10 { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .border-purple-500\/30 { border-color: rgba(124,58,237,0.25); }
+    html:not(.dark) .bg-purple-900\/20 { background-color: rgba(124,58,237,0.06); }
+    html:not(.dark) .bg-purple-900\/30 { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .bg-purple-900\/40 { background-color: rgba(124,58,237,0.10); }
+    html:not(.dark) .bg-purple-600 { background-color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500:hover { background-color: #8b5cf6; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217,119,6,0.08); }
+    html:not(.dark) .hover\:text-teal-400:hover { color: #0d9488; }
+    html:not(.dark) .hover\:bg-teal-500\/10:hover { background-color: rgba(13,148,136,0.08); }
+    html:not(.dark) .hover\:text-rose-400:hover { color: #9f1239; }
+    html:not(.dark) .hover\:bg-rose-500\/10:hover { background-color: rgba(225,29,72,0.08); }
+
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37,99,235,0.25); }
+    html:not(.dark) .bg-blue-900\/20 { background-color: rgba(37,99,235,0.06); }
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5,150,105,0.25); }
+    html:not(.dark) .bg-emerald-900\/20 { background-color: rgba(5,150,105,0.06); }
+    html:not(.dark) .text-red-400 { color: #dc2626; }
+    html:not(.dark) .border-red-500\/30 { border-color: rgba(220,38,38,0.25); }
+    html:not(.dark) .bg-red-900\/20 { background-color: rgba(220,38,38,0.06); }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+
+    code { background: rgba(255,255,255,0.05); padding: 0.1em 0.3em; border-radius: 0.25em; font-size: 0.9em; }
+    html:not(.dark) code { background: #f3f4f6; color: #1f2937; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🦎</span>
+            <span class="font-bold text-lg hidden sm:inline">Curso iAmasters OS</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Conceitos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Instalação</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Brand</span></a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Skills</span></a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Multi-cliente</span></a>
+          <a href="../trilha6/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors"><span class="sm:hidden">T6</span><span class="hidden sm:inline">Estender</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-purple-400">Início</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-purple-400">Trilha 3</a>
+      <span>/</span>
+      <span class="text-purple-400">Módulo 3.3</span>
+    </div>
+  </nav>
+
+  <header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">MÓDULO 3.3</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">📐 Positioning</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">Porque te escolhem a ti e não a outro. Statement claro, diferencial vs alternativas, 4 arquétipos viáveis, e mensagem em 3 comprimentos para reusar em todo o lado.</p>
+
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">~55</div><div class="text-xs text-neutral-400">Minutos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">Básico</div><div class="text-xs text-neutral-400">Nível</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">Prático</div><div class="text-xs text-neutral-400">Tipo</div></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- TÓPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">📝 Statement de posicionamento</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O <strong class="text-purple-400">statement</strong> é a frase-base do teu positioning. Cabe num parágrafo, é defendível, e responde sem rodeios à pergunta: "porque vais TU resolver isto, e não outra pessoa?".
+      </p>
+
+      <div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center"><span class="mr-2">💡</span> Conceito principal</h3>
+        <p class="text-neutral-300 mb-4">Sem statement claro, a copy soa a "consultor genérico de IA". Com statement, soa a TI — específico, defendível, memorável. Não chega dizer "ajudo empresas com IA". Chega dizer "<em>instalo sistemas agénticos no pipeline comercial de SaaS B2B portugueses entre 5-50 colaboradores</em>".</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6 overflow-x-auto">
+        <h4 class="font-semibold mb-3">Template canónico</h4>
+        <pre class="text-xs sm:text-sm text-neutral-300 font-mono leading-relaxed">Para [ICP específico], que [dor exata],
+sou o [categoria distintiva] que [mecanismo único].
+Ao contrário de [alternativa A] e [alternativa B],
+eu [diferencial defendível].</pre>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+          <h4 class="font-bold text-emerald-400 mb-3">✓ Statement forte</h4>
+          <p class="text-neutral-300 text-sm italic mb-3">"Para diretores de marketing de SaaS B2B com equipa 2-10, que perdem horas a reescrever copy de campanhas, sou o operador-OS que entrega 30 dias de conteúdo em 1 semana — com voz consistente. Ao contrário de agências (lentas) ou freelances (inconsistentes), entrego um sistema instalado, não horas faturadas."</p>
+        </div>
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-3">✗ Statement fraco</h4>
+          <p class="text-neutral-300 text-sm italic mb-3">"Ajudo empresas a usar IA de forma estratégica para crescer mais. Trabalho com tecnologia de ponta para entregar soluções customizadas. Diferente do mercado pelo meu approach holístico."</p>
+          <p class="text-neutral-400 text-xs">Genérico. Não diz para quem. Não diz dor. "Holístico" não é diferencial.</p>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/40 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica prática · teste do bar</h3>
+        <p class="text-neutral-300 text-sm">Lê o teu statement em voz alta num bar barulhento a um estranho. Ele consegue (a) repetir o que ouviu e (b) dizer-te a quem te apresentar? Se sim, statement está bom. Se ele diz "ah, tipo aqueles consultores de IA?", ainda não chegaste.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">⚖️ Diferencial vs alternativas (não vs concorrentes)</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Erro clássico: posicionar-te <strong>contra outros consultores</strong>. Acertado: posicionar-te contra todas as <strong class="text-purple-400">alternativas que o cliente avalia</strong> — incluindo fazer in-house, não fazer nada, ou contratar uma agência genérica.
+      </p>
+
+      <div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center"><span class="mr-2">💡</span> Conceito principal</h3>
+        <p class="text-neutral-300 mb-4">Quando um lead te aborda, na cabeça dele tens normalmente <strong>4 concorrentes silenciosos</strong>: (1) fazer in-house, (2) agência genérica conhecida, (3) freelance no Upwork, (4) não fazer nada. Concorrente direto teu (outro consultor parecido) é só uma de 4-5 opções — e raramente a principal.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h4 class="font-semibold mb-3">As 4 alternativas a mapear no positioning.md</h4>
+        <ol class="space-y-3 text-neutral-300 text-sm list-decimal list-inside">
+          <li><strong class="text-purple-400">Fazer in-house</strong> — prós/contras na perspetiva do cliente (não tua)</li>
+          <li><strong class="text-purple-400">Agência genérica</strong> — prós/contras (escala, processo, preço)</li>
+          <li><strong class="text-purple-400">Concorrente direto</strong> — 1-2 nomes específicos, prós/contras honestos</li>
+          <li><strong class="text-purple-400">Não fazer nada</strong> — esta é a alternativa mais comum e mais subestimada</li>
+        </ol>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6 overflow-x-auto">
+        <h4 class="font-semibold mb-3">Tabela comparativa típica</h4>
+        <table class="w-full text-sm">
+          <thead class="bg-dark-700/50">
+            <tr><th class="text-left p-3">Alternativa</th><th class="text-left p-3">Vantagem</th><th class="text-left p-3">Custo escondido</th></tr>
+          </thead>
+          <tbody class="divide-y divide-dark-600">
+            <tr><td class="p-3">In-house</td><td class="p-3 text-neutral-400">Controlo total</td><td class="p-3 text-neutral-400">12 meses de aprendizagem, hiring caro</td></tr>
+            <tr><td class="p-3">Agência grande</td><td class="p-3 text-neutral-400">Processo, escala</td><td class="p-3 text-neutral-400">Júnior na conta, contratos longos</td></tr>
+            <tr><td class="p-3">Freelance Upwork</td><td class="p-3 text-neutral-400">Barato</td><td class="p-3 text-neutral-400">Qualidade inconsistente, sem método</td></tr>
+            <tr><td class="p-3">Não fazer nada</td><td class="p-3 text-neutral-400">Zero risco aparente</td><td class="p-3 text-neutral-400">Custo de oportunidade composto</td></tr>
+            <tr class="bg-purple-900/20"><td class="p-3"><strong>Tu</strong></td><td class="p-3 text-purple-400">[teu diferencial]</td><td class="p-3 text-neutral-400">[honestidade sobre limites]</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center"><span class="mr-2">📊</span> Sê honesto sobre teus limites</h3>
+        <p class="text-neutral-300 text-sm">Positioning forte inclui o que <strong>não faz bem</strong>. "Não somos a opção mais barata", "Não fazemos projetos &lt;5k", "Não trabalhamos com X setor". Honestidade aqui credibiliza o resto do statement. Operadores que dizem "fazemos tudo para todos" não são acreditados em nada.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">🎭 Os 4 arquétipos de positioning</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Há infinitas formas de te posicionares, mas a esmagadora maioria dos posicionamentos defensáveis cabe em <strong class="text-purple-400">4 arquétipos</strong>. Conhecê-los acelera escolha — e ajuda a perceber porque o teu posicionamento atual está fraco.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-dark-800 rounded-xl p-6 border border-dark-600">
+          <h4 class="font-bold text-purple-400 mb-2">🎯 Vertical-specialist</h4>
+          <p class="text-sm text-neutral-400 mb-3">"Só trabalho com [vertical X]"</p>
+          <p class="text-neutral-300 text-sm mb-3">Foco em 1 setor (legal-tech, fintech B2B, healthtech, agro-consultoria). Permite preço premium e ciclo de venda curto (clientes recomendam dentro do vertical). Risco: dependência setorial — se o setor entra em crise, ficas exposto.</p>
+          <p class="text-neutral-400 text-xs"><strong>Exemplo:</strong> "Sou o operador de IA para escritórios de advogados portugueses de 5-30 advogados."</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl p-6 border border-dark-600">
+          <h4 class="font-bold text-purple-400 mb-2">🔧 Use-case-specialist</h4>
+          <p class="text-sm text-neutral-400 mb-3">"Só faço [use-case Y]"</p>
+          <p class="text-neutral-300 text-sm mb-3">Foco num caso (automação de propostas comerciais, onboarding de novos clientes, qualificação de leads). Cross-vertical. Risco: comoditizar quando o use-case amadurece e aparecem ferramentas no-code.</p>
+          <p class="text-neutral-400 text-xs"><strong>Exemplo:</strong> "Só faço automação de propostas comerciais. Em 30 dias entrego o teu pipeline a funcionar."</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl p-6 border border-dark-600">
+          <h4 class="font-bold text-purple-400 mb-2">📚 Método-próprio</h4>
+          <p class="text-sm text-neutral-400 mb-3">"Aplico o método [X-Framework]"</p>
+          <p class="text-neutral-300 text-sm mb-3">Diferencias-te por uma metodologia proprietária com nome. Permite IP defensável, escalar via formação e licensing. Risco: investimento alto em criar, documentar e popularizar o método.</p>
+          <p class="text-neutral-400 text-xs"><strong>Exemplo:</strong> "Aplico o Clause-Mining Framework para extrair valor de contratos legacy."</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl p-6 border border-red-500/30">
+          <h4 class="font-bold text-red-400 mb-2">🚫 Anti-X</h4>
+          <p class="text-sm text-neutral-400 mb-3">"NÃO sou [estereótipo Y] · sou [oposto]"</p>
+          <p class="text-neutral-300 text-sm mb-3">Diferencias-te pela contra-narrativa. Alto contraste, polariza. Funciona quando o nicho está saturado de hype. Atrai uma audiência específica e afasta o resto — útil quando queres filtrar mesmo.</p>
+          <p class="text-neutral-400 text-xs"><strong>Exemplo:</strong> "Não vendo IA. Vendo eliminação de trabalho operacional. Se queres uma demo, vai para a concorrência."</p>
+        </div>
+      </div>
+
+      <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center"><span class="mr-2">📊</span> Combinar arquétipos</h3>
+        <p class="text-neutral-300 text-sm">Operadores avançados combinam 2-3: vertical (legal-tech) + use-case (automação de revisão de contratos) + método próprio (framework "Clause-Mining"). Resultado: positioning extremamente defendível mas requer investimento em narrativa e prova.</p>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/40 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica prática · começa por 1</h3>
+        <p class="text-neutral-300 text-sm">Júnior tenta combinar 3 arquétipos no primeiro positioning e acaba com mensagem confusa. Comeza por <strong>um só arquétipo</strong> bem executado durante 6-12 meses, prova-o com casos, depois adiciona segundo arquétipo. A combinação certa emerge da prática, não do whiteboard.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">🔍 Como marketing-positioning analisa concorrentes (via Firecrawl)</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Não defines positioning no vácuo. A skill <code>marketing-positioning</code> usa <code>tool-firecrawl-scraper</code> para <strong class="text-purple-400">analisar 3-5 concorrentes diretos</strong> e identificar onde todos dizem o mesmo (gap potencial) e onde alguém ocupa espaço único (a evitar copy).
+      </p>
+
+      <h4 class="text-lg font-semibold mb-4">Processo em 5 passos</h4>
+
+      <div class="space-y-4 mb-6">
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center"><span class="text-purple-400 font-bold">1</span></div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h5 class="font-semibold mb-1">Recolher inputs</h5>
+            <p class="text-sm text-neutral-300">Modo construção (sem positioning.md) ou refinamento. 4-5 perguntas chave: o que vendes, para quem, alternativas atuais, ângulo emocional, alergias.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center"><span class="text-purple-400 font-bold">2</span></div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h5 class="font-semibold mb-1">Analisar concorrentes</h5>
+            <p class="text-sm text-neutral-300">Pede 3-5 URLs de concorrentes. Invoca <code>tool-firecrawl-scraper</code> para cada. Extrai positioning statements + palavras dominantes + claims principais.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center"><span class="text-purple-400 font-bold">3</span></div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h5 class="font-semibold mb-1">Identificar gaps</h5>
+            <p class="text-sm text-neutral-300">Onde todos dizem o mesmo (gap por sobre-comoditização), onde ninguém entra (gap por evitamento), qual a posição que ainda não tem dono.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center"><span class="text-purple-400 font-bold">4</span></div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h5 class="font-semibold mb-1">Propor 3-5 ângulos</h5>
+            <p class="text-sm text-neutral-300">Combinações de arquétipos viáveis. Cada um com prós/contras, exemplos de mensagem-chave, perfil de cliente que atrai e que afasta.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center"><span class="text-purple-400 font-bold">5</span></div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h5 class="font-semibold mb-1">Operador escolhe</h5>
+            <p class="text-sm text-neutral-300">Escreve para <code>brand-context/positioning/positioning.md</code> + propõe registar decisão em <code>decisions-log</code>.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center"><span class="mr-2">📊</span> Palavras-sinal a procurar nos concorrentes</h3>
+        <p class="text-neutral-300 text-sm mb-3">A skill conta frequência de termos no scrape. Palavras repetidas por 4+ concorrentes = comoditizado, evitar. Palavras únicas a 1 concorrente = território ocupado, não copiar.</p>
+        <ul class="space-y-2 text-neutral-300 text-sm">
+          <li><strong>Comoditizadas típicas</strong>: "personalizado", "estratégico", "inovador", "transformação digital", "soluções", "ecossistema"</li>
+          <li><strong>Sinal de positioning forte</strong>: verbos físicos, números específicos, nomes próprios de metodologia, casos nominais</li>
+        </ul>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/40 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica prática · concorrentes &gt; competidores diretos</h3>
+        <p class="text-neutral-300 text-sm">Para a análise, inclui não só concorrentes diretos mas também: 1 agência genérica grande, 1 ferramenta SaaS que substitui parte do teu serviço, 1 influencer da área que vende cursos. Os melhores ângulos saem da intersecção entre estes — não da repetição do que outros consultores dizem.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">📏 Mensagem em 3 comprimentos · 1 linha · 1 parágrafo · 1 página</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Statement fechado, agora derivas as <strong class="text-purple-400">3 versões do mesmo</strong>. Cada uma para um contexto diferente. Sem isto, vais reinventar a roda em cada call de venda.
+      </p>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h4 class="font-semibold mb-3">Os 3 comprimentos</h4>
+        <ul class="space-y-3 text-neutral-300 text-sm">
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">→</span><div><strong class="text-purple-400">1 linha</strong> (10-15 palavras) — tagline do site, bio LinkedIn, intro em evento.</div></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">→</span><div><strong class="text-purple-400">1 parágrafo</strong> (50-80 palavras) — about section, intro email frio, resposta a "o que fazes?".</div></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">→</span><div><strong class="text-purple-400">1 página</strong> (400-700 palavras) — landing page hero+intro, deck slide narrativo, kickoff de proposta.</div></li>
+        </ul>
+      </div>
+
+      <div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center"><span class="mr-2">💡</span> Exemplo coerente nos 3 comprimentos</h3>
+        <div class="space-y-3 text-sm">
+          <div class="bg-dark-800/50 rounded p-3">
+            <strong class="text-purple-400">1 linha:</strong>
+            <p class="text-neutral-300 italic mt-1">"Instalo sistemas agénticos no pipeline comercial de SaaS B2B."</p>
+          </div>
+          <div class="bg-dark-800/50 rounded p-3">
+            <strong class="text-purple-400">1 parágrafo:</strong>
+            <p class="text-neutral-300 italic mt-1">"Trabalho com diretores comerciais de SaaS B2B portugueses (5-50 colaboradores) que perdem horas semanais a qualificar leads manualmente. Em 6 semanas instalo um sistema agéntico que filtra, prioriza e personaliza outreach. Não vendo horas — entrego o sistema a funcionar. Já implementado em 12 empresas, com churn nulo em 18 meses."</p>
+          </div>
+          <div class="bg-dark-800/50 rounded p-3">
+            <strong class="text-purple-400">1 página:</strong>
+            <p class="text-neutral-400 italic mt-1">[Hero, dor expandida com 2 casos nominais, processo de 6 semanas detalhado, prova com números, anti-cliente claro, CTA final. Reusável em landing, deck, proposta inicial.]</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center"><span class="mr-2">📊</span> Onde reusar cada comprimento</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+          <div class="bg-dark-700/50 rounded p-3">
+            <strong class="text-blue-400">1 linha</strong>
+            <p class="text-neutral-400 text-xs mt-1">Tagline site · LinkedIn headline · email signature · evento intro</p>
+          </div>
+          <div class="bg-dark-700/50 rounded p-3">
+            <strong class="text-blue-400">1 parágrafo</strong>
+            <p class="text-neutral-400 text-xs mt-1">About me · cold email body · resposta DM · podcast intro</p>
+          </div>
+          <div class="bg-dark-700/50 rounded p-3">
+            <strong class="text-blue-400">1 página</strong>
+            <p class="text-neutral-400 text-xs mt-1">Landing hero · proposta cover · deck investidor · about us</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/40 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica prática · consistência entre comprimentos</h3>
+        <p class="text-neutral-300 text-sm">Os 3 comprimentos têm de ter o <strong>mesmo ICP, mesma dor, mesmo diferencial</strong>. Se a 1 linha fala "SaaS B2B" e a página fala "qualquer empresa que queira escalar", positioning está partido. A skill <code>marketing-positioning</code> valida coerência cruzada antes de fechar.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">🔁 Quando re-fazer positioning</h2>
+      </div>
+
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Positioning não é "instalar e esquecer". Mas também não é para tocar todos os meses. Há <strong class="text-purple-400">3 gatilhos legítimos</strong> para re-fazer — fora deles, mexer no positioning produz incoerência.
+      </p>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 overflow-hidden mb-6">
+        <table class="w-full text-sm">
+          <thead class="bg-dark-700/50">
+            <tr>
+              <th class="text-left p-4 font-semibold">Gatilho</th>
+              <th class="text-left p-4 font-semibold">Sinal observável</th>
+              <th class="text-left p-4 font-semibold">Ação</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-600">
+            <tr><td class="p-4"><strong>Mudança de mercado</strong></td><td class="p-4 text-neutral-400">Concorrente forte novo, regulação muda, IA substitui parte do serviço</td><td class="p-4 text-neutral-400">Re-fazer · 6-12 meses entre revisões</td></tr>
+            <tr><td class="p-4"><strong>Mudança de dor</strong></td><td class="p-4 text-neutral-400">Clientes pedem coisa diferente do que vendes · &gt;30% dos leads pedem X</td><td class="p-4 text-neutral-400">Re-fazer · oferta pode mudar mesmo</td></tr>
+            <tr><td class="p-4"><strong>Mudança de ICP</strong></td><td class="p-4 text-neutral-400">Subiste/desceste ticket · novo segmento aparece · perdeste vertical</td><td class="p-4 text-neutral-400">Re-fazer · ICP deve já estar refeito</td></tr>
+            <tr><td class="p-4"><strong>Win rate baixo</strong></td><td class="p-4 text-neutral-400">Ganhas &lt;1 em 5 propostas durante 3 meses</td><td class="p-4 text-neutral-400">Re-fazer · provavelmente positioning fraco</td></tr>
+            <tr><td class="p-4"><strong>Win rate muito alto</strong></td><td class="p-4 text-neutral-400">Ganhas &gt;4 em 5 propostas</td><td class="p-4 text-neutral-400">Estás bem · sobe preço, não mexas no positioning</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center"><span class="mr-2">⚠️</span> Anti-padrão · re-fazer por insegurança</h3>
+        <p class="text-neutral-300 text-sm">Operadores júnior re-fazem positioning de 3 em 3 meses porque sentem-se inseguros depois de uma proposta perdida. Resultado: identidade caótica, ninguém sabe o que ele faz, copy contraditória ao longo do tempo. <strong>Positioning bom precisa de 6-12 meses para começar a render</strong>. Não mexas antes disso a não ser que um dos 3 gatilhos reais aconteceu.</p>
+      </div>
+
+      <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center"><span class="mr-2">📊</span> 3 modos de iteração (do mais leve ao mais pesado)</h3>
+        <ul class="space-y-2 text-neutral-300 text-sm">
+          <li><strong>Refinamento de mensagem</strong> — mudar 1-2 frases nas 3 versões, manter arquétipo e ICP</li>
+          <li><strong>Refresh de arquétipo</strong> — adicionar segundo arquétipo (ex: já és vertical-specialist, juntas use-case-specialist)</li>
+          <li><strong>Rebuild completo</strong> — invocar <code>marketing-positioning</code> do zero, backup do antigo em <code>brand-context/positioning/_archive/YYYY-MM-DD/</code></li>
+        </ul>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/40 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica prática · sempre regista no decisions-log</h3>
+        <p class="text-neutral-300 text-sm">Cada re-fazer de positioning (mesmo refinamento) deve gerar entrada em <code>context/decisions-log.md</code> com: decisão, gatilho que motivou, raciocínio, critério para reconsiderar. Sem isto, daqui a 6 meses não te lembras porque mudaste — e arriscas-te a desfazer por engano.</p>
+      </div>
+    </section>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 rounded-xl border border-purple-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">✅</span> Resumo do Módulo</h2>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Statement template: Para [ICP] que [dor] sou [categoria] que [mecanismo]</strong><span class="text-neutral-400"> — específico, defendível, memorável</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Diferencial vs alternativas, não vs concorrentes</strong><span class="text-neutral-400"> — 4 alternativas a mapear (in-house, agência, freelance, não-fazer)</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">4 arquétipos viáveis</strong><span class="text-neutral-400"> — vertical · use-case · método-próprio · anti-X (combináveis)</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">marketing-positioning analisa 3-5 concorrentes via Firecrawl</strong><span class="text-neutral-400"> — gaps por sobre-comoditização vs por evitamento</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Mensagem em 3 comprimentos coerentes</strong><span class="text-neutral-400"> — 1 linha · 1 parágrafo · 1 página</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Re-fazer só com 3 gatilhos legítimos</strong><span class="text-neutral-400"> — mudança mercado · dor · ICP. Sempre regista no decisions-log</span></div></div>
+        </div>
+
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-purple-400 mb-2">Próxima Trilha:</h3>
+          <p class="text-neutral-300">Trilha 4 · Skills — as skills curadas do OS: meta (onboarding, deep-dive, rituais), marketing (copy, content, email), tools (humanizer, verifier, firecrawl, visual-explainer).</p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="modulo-3-2.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo 3.2</a>
+          <a href="../trilha4/index.html" class="flex-1 text-center px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-500 transition-colors">Trilha 4: Skills →</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Curso iAmasters OS · 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light') {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

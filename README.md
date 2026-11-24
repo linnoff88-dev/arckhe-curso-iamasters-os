@@ -1,4 +1,4 @@
-﻿# Curso iAmasters OS
+# Curso iAmasters OS
 
 <div align="center">
   <img src="capa/logo.svg" alt="Arckhé AI" height="48" />
@@ -6,7 +6,7 @@
 </div>
 
 
-Curso completo sobre o sistema operativo agÃªntico **iAmasters OS** â€” formato INEMA.CLUB, em portuguÃªs.
+Curso completo sobre o sistema operativo agÃªntico **iAmasters OS** â€” formato ARCKHÉ AI, em portuguÃªs.
 
 ## Estrutura
 
@@ -80,7 +80,7 @@ python3 -m http.server 8000
 
 ## Formato
 
-Seguindo padrÃ£o **INEMA.CLUB**:
+Seguindo padrÃ£o **ARCKHÉ AI**:
 - Tailwind CDN, sem build
 - Dark/light mode toggle
 - 3 secÃ§Ãµes por tÃ³pico (O que Ã© / Por que aprender / Conceitos-chave)
@@ -89,9 +89,9 @@ Seguindo padrÃ£o **INEMA.CLUB**:
 
 ## Repo do sistema
 
-VersÃ£o PT-PT do iAmasters OS (a que este curso ensina): [inematds/iamasters-os](https://github.com/inematds/iamasters-os).
+VersÃ£o PT-PT do iAmasters OS (a que este curso ensina): [linnoff88-dev/iamasters-os](https://github.com/linnoff88-dev/iamasters-os).
 
-Curso por [INEMA.CLUB](https://inema.club).
+Curso por [ARCKHÉ AI](https://ARCKHÉ AI).
 
 LicenÃ§a: MIT.
 
